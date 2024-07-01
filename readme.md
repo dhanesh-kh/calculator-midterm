@@ -63,8 +63,8 @@ Logging is configured using `logging.conf`, ensuring detailed output for debuggi
 ### Error Handling
 The project employs both "Look Before You Leap" (LBYL) and "Easier to Ask for Forgiveness than Permission" (EAFP) error handling strategies.
 
-* LBYL: Used in `CalculatorHistory` to check for existing entries before adding new ones.
-    - `add_entry` function in [calculator_history.py](https://github.com/dhanesh-kh/calculator-midterm/blob/master/history/calculator_history.py)
+* LBYL: Used in `CalculatorController` to check for exit command, as well as handling delete/clear commands or invalid expressions before performing operations on the history.
+    - [controller.py](https://github.com/dhanesh-kh/calculator-midterm/blob/master/controller.py)
 * EAFP: Applied in exception handling blocks throughout the application to handle unexpected errors.
     - `run` function in [controller.py](https://github.com/dhanesh-kh/calculator-midterm/blob/master/controller.py)
     - `load_history` function in [calculator_history.py](https://github.com/dhanesh-kh/calculator-midterm/blob/master/history/calculator_history.py)
