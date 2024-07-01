@@ -1,6 +1,6 @@
 """test calculator logic functions"""
 import pytest
-from calculator.model import CalculatorModel
+from model import CalculatorModel
 
 @pytest.fixture
 def model():

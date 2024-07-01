@@ -2,7 +2,7 @@
 import os
 import pandas as pd
 import pytest
-from calculator.history.calculator_history import CalculatorHistory
+from history.calculator_history import CalculatorHistory
 
 @pytest.fixture(scope="module")
 def setup_history_file():
