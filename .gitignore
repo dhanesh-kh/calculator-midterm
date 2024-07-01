@@ -3,4 +3,6 @@
 .pytest_cache
 *__pycache__
 .env
-calculator.log
+logs
+history/history.csv
+tests/test_history.csv

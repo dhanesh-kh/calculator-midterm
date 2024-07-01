@@ -23,6 +23,7 @@ class CalculatorHistory:
             self.logger.debug('Loaded history from file: %s', self.filename)
         except FileNotFoundError:
             self.logger.warning('History file not found: %s', self.filename)
+            self.history = pd.DataFrame(columns=['Expression', 'Result'])  # Initialize empty if not found
             self.history.to_csv(self.filename, index=False)
             self.logger.debug('Created new history file: %s', self.filename)
 
