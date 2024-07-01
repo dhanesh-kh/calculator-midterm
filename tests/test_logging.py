@@ -1,4 +1,4 @@
-"""test logging functionality"""
+# test_logging.py
 import os
 import logging
 import pytest
@@ -6,21 +6,23 @@ from calculator.config import setup_logging
 
 @pytest.fixture
 def log_file():
-    """specify log file"""
-    return 'calculator.log'
+    """Specify log file"""
+    return 'logs/calculator.log'  # Update to match the new log file location
+
+def setup_module():
+    """Setup logging for tests"""
+    setup_logging()
 
 def test_log_file_creation(log_file):
-    """test that log file is created"""
+    """Test that log file is created"""
     if os.path.exists(log_file):
         os.remove(log_file)
-    setup_logging()
     logger = logging.getLogger('calculator')
     logger.info('Test log message')
     assert os.path.exists(log_file)
 
 def test_log_content(log_file):
-    """test log content"""
-    setup_logging()
+    """Test log content"""
     logger = logging.getLogger('calculator')
     logger.info('Test log message')
     with open(log_file, 'r') as f:
