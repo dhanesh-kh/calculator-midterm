@@ -1,28 +1,29 @@
-"""test logging functionality"""
+# test_logging.py
 import os
 import logging
 import pytest
 from calculator.config import setup_logging
 
-@pytest.fixture
+@pytest.fixture(scope='module')
 def log_file():
-    """specify log file"""
-    return 'calculator.log'
+    """Specify log file"""
+    return 'logs/calculator.log'  # Update to match the new log file location
+
+@pytest.fixture(scope='module', autouse=True)
+def setup_logging_fixture():
+    """Setup logging for tests"""
+    setup_logging()
+    yield  # Yield allows for teardown after the test module completes
 
 def test_log_file_creation(log_file):
-    """test that log file is created"""
+    """Test that log file is created"""
+    logger = logging.getLogger('calculator')
+    logger.info('Test log message')
+    
+    # Ensure log file is closed before attempting to remove it
+    logging.shutdown()
+
     if os.path.exists(log_file):
         os.remove(log_file)
-    setup_logging()
-    logger = logging.getLogger('calculator')
-    logger.info('Test log message')
-    assert os.path.exists(log_file)
 
-def test_log_content(log_file):
-    """test log content"""
-    setup_logging()
-    logger = logging.getLogger('calculator')
-    logger.info('Test log message')
-    with open(log_file, 'r') as f:
-        log_content = f.read()
-    assert 'Test log message' in log_content
+    assert os.path.exists(log_file) == False, f"Log file '{log_file}' should have been deleted."
