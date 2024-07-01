@@ -1,4 +1,4 @@
-# model.py
+"""model.py"""
 import re
 import logging
 from history.calculator_history import CalculatorHistory
@@ -13,7 +13,7 @@ class CalculatorModel:
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
         handler.setFormatter(formatter)
         self.logger.addHandler(handler)
-        
+
         self.history_manager = CalculatorHistory()
 
     def add(self, a: float, b: float) -> float:
@@ -42,7 +42,7 @@ class CalculatorModel:
     def evaluate_expression(self, expression: str) -> float:
         """Evaluate given expression"""
         self.logger.debug('Evaluating expression: %s', expression)
-        
+
         # Validate expression format
         match = re.fullmatch(r'(\d+\.?\d*)([+\-*/])(\d+\.?\d*)', expression.replace(' ', ''))
         if not match:

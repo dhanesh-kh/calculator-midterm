@@ -1,4 +1,4 @@
-# tests/test_history.py
+"""tests/test_history.py"""
 import os
 import pandas as pd
 import pytest
@@ -47,6 +47,3 @@ def test_retrieve_history(history_manager):
 
     for expr, res in zip(expressions, results):
         assert any((history['Expression'] == expr) & (history['Result'] == res))
-
-
-

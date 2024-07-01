@@ -1,4 +1,4 @@
-# test_logging.py
+"""test_logging.py"""
 import os
 import logging
 import pytest
@@ -19,7 +19,7 @@ def test_log_file_creation(log_file):
     """Test that log file is created"""
     logger = logging.getLogger('calculator')
     logger.info('Test log message')
-    
+
     # Ensure log file is closed before attempting to remove it
     logging.shutdown()
 
