@@ -8,11 +8,14 @@ class CalculatorHistory:
         self.filename = os.path.join(os.path.dirname(__file__), filename)
         self.logger = logging.getLogger('calculator.history')
         self.logger.setLevel(logging.DEBUG)  # Set log level to DEBUG
-        handler = logging.StreamHandler()
-        handler.setLevel(logging.DEBUG)
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        handler.setFormatter(formatter)
-        self.logger.addHandler(handler)
+        
+        # Configure logging handler only once
+        if not self.logger.hasHandlers():
+            handler = logging.StreamHandler()
+            handler.setLevel(logging.DEBUG)
+            formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+            handler.setFormatter(formatter)
+            self.logger.addHandler(handler)
 
         self.history = pd.DataFrame(columns=['Expression', 'Result'])
         self.load_history()
@@ -28,6 +31,12 @@ class CalculatorHistory:
             self.logger.debug('Created new history file: %s', self.filename)
 
     def add_entry(self, expression, result):
+        # Check if the entry already exists in history to prevent duplicates
+        if not self.history[(self.history['Expression'] == expression) & (self.history['Result'] == result)].empty:
+            self.logger.debug('Entry already exists in history: %s = %s', expression, result)
+            return
+        
+        # Add new entry
         entry = pd.DataFrame({'Expression': [expression], 'Result': [result]})
         self.history = pd.concat([self.history, entry], ignore_index=True)
         self.history.to_csv(self.filename, index=False)
