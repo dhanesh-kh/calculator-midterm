@@ -5,6 +5,7 @@ import os
 
 from controller import CalculatorController
 from view import CalculatorView
+from history.calculator_history import CalculatorHistory
 
 def setup_logging(default_path='logging.conf', default_level=logging.INFO):
     """Setup logging configuration"""
@@ -20,7 +21,8 @@ def main():
     logger.info('Starting Calculator Application')
 
     view = CalculatorView()
-    controller = CalculatorController(view)
+    history = CalculatorHistory()  # Initialize CalculatorHistory instance
+    controller = CalculatorController(view, history)  # Pass history to CalculatorController
 
     try:
         controller.run()
@@ -29,3 +31,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
