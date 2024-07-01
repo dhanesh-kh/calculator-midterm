@@ -68,3 +68,5 @@ The project employs both "Look Before You Leap" (LBYL) and "Easier to Ask for Fo
 * EAFP: Applied in exception handling blocks throughout the application to handle unexpected errors.
     - `run` function in [controller.py](https://github.com/dhanesh-kh/calculator-midterm/blob/master/controller.py)
     - `load_history` function in [calculator_history.py](https://github.com/dhanesh-kh/calculator-midterm/blob/master/history/calculator_history.py)
+
+### Video Demonstration
