@@ -42,4 +42,11 @@ def test_retrieve_history(history_manager):
     # Retrieve all entries from history_manager
     history = history_manager.get_history()
 
-    expected_entries = len(expressions) + 1  # Initial en
+    expected_entries = len(expressions) + 1  # Initial entry plus new entries
+    assert len(history) == expected_entries
+
+    for expr, res in zip(expressions, results):
+        assert any((history['Expression'] == expr) & (history['Result'] == res))
+
+
+

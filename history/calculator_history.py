@@ -8,7 +8,7 @@ class CalculatorHistory:
         self.filename = os.path.join(os.path.dirname(__file__), filename)
         self.logger = logging.getLogger('calculator.history')
         self.logger.setLevel(logging.DEBUG)  # Set log level to DEBUG
-        
+
         # Configure logging handler only once
         if not self.logger.hasHandlers():
             handler = logging.StreamHandler()
@@ -35,12 +35,22 @@ class CalculatorHistory:
         if not self.history[(self.history['Expression'] == expression) & (self.history['Result'] == result)].empty:
             self.logger.debug('Entry already exists in history: %s = %s', expression, result)
             return
-        
-        # Add new entry
-        entry = pd.DataFrame({'Expression': [expression], 'Result': [result]})
-        self.history = pd.concat([self.history, entry], ignore_index=True)
-        self.history.to_csv(self.filename, index=False)
-        self.logger.debug('Added entry to history: %s = %s', expression, result)
+
+        # Ensure the entry is valid
+        if expression and result is not None:
+            entry = pd.DataFrame({'Expression': [expression], 'Result': [result]})
+
+            # Exclude empty or all-NA columns from the entry before concatenation
+            if not entry.dropna(axis=1, how='all').empty:
+                self.history = pd.concat([self.history, entry], ignore_index=True)
+                self.history.to_csv(self.filename, index=False)
+                self.logger.debug('Added entry to history: %s = %s', expression, result)
+            else:
+                self.logger.warning('Attempted to add empty or all-NA entry: %s = %s', expression, result)
+        else:
+            self.logger.warning('Attempted to add invalid entry: %s = %s', expression, result)
 
     def get_history(self):
         return self.history
+
+
