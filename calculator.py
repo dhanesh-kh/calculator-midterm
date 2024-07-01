@@ -1,3 +1,4 @@
+"""Calculator application entry point"""
 import logging
 import logging.config
 import os
@@ -13,13 +14,14 @@ def setup_logging(default_path='logging.conf', default_level=logging.INFO):
         logging.basicConfig(level=default_level)
 
 def main():
+    """Start application and logging"""
     setup_logging()
     logger = logging.getLogger('calculator')
     logger.info('Starting Calculator Application')
-    
+
     view = CalculatorView()
     controller = CalculatorController(view)
-    
+
     try:
         controller.run()
     except Exception as e:

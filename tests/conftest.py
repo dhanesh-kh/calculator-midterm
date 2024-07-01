@@ -1,3 +1,4 @@
+"""configure path for tests"""
 import sys
 import os
 
