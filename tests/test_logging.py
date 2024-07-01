@@ -2,7 +2,7 @@
 import os
 import logging
 import pytest
-from calculator.config import setup_logging
+from config import setup_logging
 
 @pytest.fixture(scope='module')
 def log_file():
