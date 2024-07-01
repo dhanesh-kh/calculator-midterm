@@ -1,9 +1,10 @@
-# history/calculator_history.py
-import pandas as pd
+"""history/calculator_history.py"""
 import os
 import logging
+import pandas as pd
 
 class CalculatorHistory:
+    """handle expression history using pandas"""
     def __init__(self, filename='history.csv'):
         self.filename = os.path.join(os.path.dirname(__file__), filename)
         self.logger = logging.getLogger('calculator.history')
@@ -21,6 +22,7 @@ class CalculatorHistory:
         self.load_history()
 
     def load_history(self):
+        """load history from file or create one if none is found"""
         try:
             self.history = pd.read_csv(self.filename)
             self.logger.debug('Loaded history from file: %s', self.filename)
@@ -31,6 +33,7 @@ class CalculatorHistory:
             self.logger.debug('Created new history file: %s', self.filename)
 
     def add_entry(self, expression, result):
+        """function for adding an entry to history file"""
         # Check if the entry already exists in history to prevent duplicates
         if not self.history[(self.history['Expression'] == expression) & (self.history['Result'] == result)].empty:
             self.logger.debug('Entry already exists in history: %s = %s', expression, result)
@@ -51,6 +54,5 @@ class CalculatorHistory:
             self.logger.warning('Attempted to add invalid entry: %s = %s', expression, result)
 
     def get_history(self):
+        """history"""
         return self.history
-
-
