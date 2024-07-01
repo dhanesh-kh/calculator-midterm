@@ -45,6 +45,19 @@ Logging is configured using `logging.conf`, ensuring detailed output for debuggi
     2024-07-01 09:42:08,530 - calculator - DEBUG - User input: exit
     2024-07-01 09:42:08,532 - calculator - INFO - Displayed message: Exiting the calculator.
     2024-07-01 09:42:08,532 - calculator - INFO - User exited the application.
+    2024-07-01 11:26:23,358 - calculator - DEBUG - User input: clear
+    2024-07-01 11:26:23,360 - calculator.history - INFO - Cleared history.
+    2024-07-01 11:26:23,360 - calculator - INFO - Displayed message: Cleared history.
+    2024-07-01 11:26:26,611 - calculator - DEBUG - User input: 10+20
+    2024-07-01 11:26:26,611 - calculator - DEBUG - Evaluating expression: 10+20
+    2024-07-01 11:26:26,611 - calculator - DEBUG - Adding: 10.0 + 20.0
+    2024-07-01 11:26:26,613 - calculator.history - DEBUG - Added entry to history: 10+20 = 30.0
+    2024-07-01 11:26:26,615 - calculator.history - DEBUG - Added entry to history: 10+20 = 30.0
+    2024-07-01 11:26:26,615 - calculator - DEBUG - Displayed result: 30.0
+    2024-07-01 11:26:26,615 - calculator - INFO - Evaluated expression: 10+20 = 30.0
+    2024-07-01 11:26:48,286 - calculator - DEBUG - User input: delete 10+20
+    2024-07-01 11:26:48,287 - calculator.history - INFO - Deleted expression from history: 10+20
+    2024-07-01 11:26:48,288 - calculator - INFO - Displayed message: Deleted '10+20' from history.
     ```
 
 ### Error Handling
