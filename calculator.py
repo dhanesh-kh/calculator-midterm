@@ -1,4 +1,5 @@
 """Calculator application entry point"""
+
 import logging
 import logging.config
 import os
@@ -9,10 +10,13 @@ from history.calculator_history import CalculatorHistory
 
 def setup_logging(default_path='logging.conf', default_level=logging.INFO):
     """Setup logging configuration"""
+    if not os.path.exists('logs'):
+        os.makedirs('logs')
+    
     if os.path.exists(default_path):
-        logging.config.fileConfig(default_path)
+        logging.config.fileConfig(default_path, disable_existing_loggers=False)
     else:
-        logging.basicConfig(level=default_level)
+        raise FileNotFoundError(f"Logging configuration file not found: {default_path}")
 
 def main():
     """Start application and logging"""
@@ -31,4 +35,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

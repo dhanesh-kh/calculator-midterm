@@ -7,14 +7,18 @@ class CalculatorModel:
     """Manages calculator logic"""
     def __init__(self):
         self.logger = logging.getLogger('calculator')
-        self.logger.setLevel(logging.DEBUG)  # Set log level to DEBUG
-        handler = logging.StreamHandler()
-        handler.setLevel(logging.DEBUG)
-        formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-        handler.setFormatter(formatter)
-        self.logger.addHandler(handler)
+        self.logger.setLevel(logging.DEBUG) 
+
+        # Remove StreamHandler setup
+        # handler = logging.StreamHandler()
+        # handler.setLevel(logging.DEBUG)
+        # formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+        # handler.setFormatter(formatter)
+        # self.logger.addHandler(handler)
 
         self.history_manager = CalculatorHistory()
+        
+        self.history_manager.logger = self.logger
 
     def add(self, a: float, b: float) -> float:
         """Addition function"""
