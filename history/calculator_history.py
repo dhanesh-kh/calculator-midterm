@@ -11,11 +11,17 @@ class CalculatorHistory:
         self.logger.setLevel(logging.DEBUG)  # Set log level to DEBUG
 
         if not self.logger.hasHandlers():
-            handler = logging.StreamHandler()
+            # Add only the file handler
+            handler = logging.FileHandler('logs/calculator.log', 'a')
             handler.setLevel(logging.DEBUG)
             formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
             handler.setFormatter(formatter)
             self.logger.addHandler(handler)
+
+            # Check if log file exists, log creation if it doesn't
+            log_file = 'logs/calculator.log'
+            if not os.path.exists(log_file):
+                self.logger.info('Created new log file: %s', log_file)
 
         self.history = pd.DataFrame(columns=['Expression', 'Result'])
         self.load_history()
@@ -62,6 +68,3 @@ class CalculatorHistory:
     def get_history(self):
         """Return history DataFrame"""
         return self.history
-
-
-
