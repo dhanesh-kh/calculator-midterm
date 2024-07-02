@@ -65,8 +65,11 @@ The project employs both "Look Before You Leap" (LBYL) and "Easier to Ask for Fo
 
 * LBYL: Used in `CalculatorController` to check for exit command, as well as handling delete/clear commands or invalid expressions before performing operations on the history.
     - [controller.py](https://github.com/dhanesh-kh/calculator-midterm/blob/master/controller.py)
+
 * EAFP: Applied in exception handling blocks throughout the application to handle unexpected errors.
     - `run` function in [controller.py](https://github.com/dhanesh-kh/calculator-midterm/blob/master/controller.py)
     - `load_history` function in [calculator_history.py](https://github.com/dhanesh-kh/calculator-midterm/blob/master/history/calculator_history.py)
 
 ### Video Demonstration
+https://github.com/dhanesh-kh/calculator-midterm/assets/87044697/febe8cf2-b86b-45b5-b7af-a26b0ad2ec2d
+
